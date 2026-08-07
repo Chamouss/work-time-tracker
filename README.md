@@ -20,7 +20,7 @@ A field tech's day is 12+ store visits, a shift clock nobody keeps for you, gas 
 ## Features
 
 ### 01 · Order tracker + shift clock
-<img src="showcase/img/orders-home.png" width="280" align="right" alt="Orders home">
+<img src="img/orders-home.png" width="280" align="right" alt="Orders home">
 
 Home is a live hero card: elapsed shift time, orders done, miles driven, earnings so far. Tap to clock in, hold for a break — punches, breaks, and per-order work/drive time land in the day's log automatically.
 
@@ -38,7 +38,7 @@ On-device Vision OCR reads the date, the total, and — for gas receipts — the
 - Every scan feeds the expense + mileage reports
 
 ### 03 · Schedule + route importer
-<img src="showcase/img/ocr-import.png" width="280" align="right" alt="Work order import">
+<img src="img/ocr-import.png" width="280" align="right" alt="Work order import">
 
 The day's orders arrive as an SAP work-order screen. Instead of retyping 49 tickets, screenshot it — the importer reads store numbers, descriptions, and dates straight off the image and builds the day.
 
@@ -49,7 +49,7 @@ The day's orders arrive as an SAP work-order screen. Instead of retyping 49 tick
 <br clear="right">
 
 ### 04 · Route optimizer
-<img src="showcase/img/route-builder.png" width="280" align="right" alt="Route builder">
+<img src="img/route-builder.png" width="280" align="right" alt="Route builder">
 
 A genetic-algorithm optimizer runs over the day's stops and quietly offers a better order — 67 minutes saved on a 12-stop, 165-mile day. One tap to apply.
 
@@ -70,7 +70,7 @@ The running shift lives in the Dynamic Island and as a Live Activity — clock, 
 - Siri + Shortcuts: "clock me in" from CarPlay
 
 ### 07 · Earnings + mileage
-<img src="showcase/img/time-clock.png" width="280" align="right" alt="Time and punches">
+<img src="img/time-clock.png" width="280" align="right" alt="Time and punches">
 
 Hours, drive time, and auto-logged mileage roll up into weekly earnings — with the IRS-rate deduction already computed. Payroll CSV and PDF mileage reports export in a tap.
 
