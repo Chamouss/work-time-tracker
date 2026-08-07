@@ -5,7 +5,7 @@
 
 `SwiftUI` · `iOS 17+` · `Zero dependencies` · `On-device OCR` · `15 themes`
 
-> **[View the full showcase →](https://YOUR-USERNAME.github.io/WorkTimeTracker/)** *(GitHub Pages: `showcase/index.html`)*
+> **[View the full showcase →](https://CHAMOUSS.github.io/WorkTimeTracker/)** *(GitHub Pages: `img/index.html`)*
 
 ---
 
