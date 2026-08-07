@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WorkTimeTracker — the field day, organized</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--tint:#0A84FF;--bg:#EEF1F6;--ink:#10141C;--dim:#5A6275;--faint:#9AA1B2;--glass:rgba(255,255,255,0.5);--glass2:rgba(255,255,255,0.72);--spec:rgba(255,255,255,0.75);--hair:rgba(16,20,28,0.08);--mono:"JetBrains Mono",ui-monospace,monospace;--sans:-apple-system,"SF Pro Display",BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--tint);text-decoration:none}a:hover{color:#0060c9}
+.orbs{position:fixed;inset:-10%;z-index:0;pointer-events:none;background:radial-gradient(38% 30% at 16% 8%,rgba(10,132,255,0.4),transparent 70%),radial-gradient(34% 26% at 88% 12%,rgba(255,138,170,0.38),transparent 70%),radial-gradient(40% 34% at 82% 88%,rgba(10,132,255,0.3),transparent 72%),radial-gradient(32% 28% at 6% 90%,rgba(120,222,200,0.36),transparent 70%),radial-gradient(30% 24% at 50% 50%,rgba(255,214,140,0.22),transparent 72%)}
+main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 28px}
+.glass{background:var(--glass);backdrop-filter:blur(30px) saturate(1.7);-webkit-backdrop-filter:blur(30px) saturate(1.7);border:1px solid var(--spec);border-radius:26px;box-shadow:0 10px 34px -12px rgba(20,30,60,0.22),inset 0 1px 1px rgba(255,255,255,0.9)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--dim);display:flex;align-items:center;gap:8px;text-transform:uppercase}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:4px;background:var(--tint)}
+/* hero */
+.hero{display:grid;grid-template-columns:1.15fr 0.85fr;gap:48px;align-items:center;padding:88px 0 40px}
+.hero h1{font-size:clamp(40px,5.4vw,62px);font-weight:700;letter-spacing:-2px;line-height:1.02;margin:16px 0 18px}
+.hero h1 em{font-style:normal;color:var(--tint)}
+.lede{font-size:18px;line-height:1.55;color:var(--dim);max-width:44ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.chip{font-family:var(--mono);font-size:11px;letter-spacing:0.5px;padding:8px 14px;border-radius:12px;background:var(--glass2);border:1px solid var(--spec);color:var(--ink);backdrop-filter:blur(20px)}
+/* phone */
+.phone{width:100%;max-width:330px;margin:0 auto;border-radius:44px;background:#fff;border:1px solid var(--spec);box-shadow:0 30px 70px -30px rgba(20,30,60,0.45),0 10px 34px -12px rgba(20,30,60,0.22);padding:10px;position:relative}
+.phone .scr{border-radius:36px;overflow:hidden;display:block;width:100%;aspect-ratio:1188/2568;position:relative;background:var(--bg)}
+.phone img{display:block;width:100%;height:100%;object-fit:cover}
+/* sections */
+.why{margin:56px 0 0;padding:44px 48px}
+.why h2{font-size:28px;letter-spacing:-0.8px;margin:12px 0 14px}
+.why p{font-size:16.5px;line-height:1.65;color:var(--dim);max-width:70ch}
+.why p strong{color:var(--ink);font-weight:600}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:96px 0 0}
+.feat.rev .copy{order:2}.feat.rev .vis{order:1}
+.feat h2{font-size:30px;font-weight:700;letter-spacing:-1px;line-height:1.1;margin:14px 0 14px}
+.feat p{font-size:16px;line-height:1.62;color:var(--dim);max-width:46ch}
+.feat ul{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:10px}
+.feat li{font-size:14.5px;color:var(--ink);display:flex;gap:10px;align-items:baseline}
+.feat li::before{content:"—";color:var(--tint);font-weight:700;flex:none}
+.num{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--faint)}
+/* mock screens */
+.mock{width:100%;height:100%;background:var(--bg);position:relative;font-size:13px;display:flex;flex-direction:column;overflow:hidden}
+.mock .morbs{position:absolute;inset:-10%;background:radial-gradient(38% 30% at 16% 10%,rgba(10,132,255,0.55),transparent 70%),radial-gradient(34% 26% at 88% 16%,rgba(255,138,170,0.5),transparent 70%),radial-gradient(40% 34% at 80% 86%,rgba(10,132,255,0.4),transparent 72%),radial-gradient(32% 28% at 8% 92%,rgba(120,222,200,0.45),transparent 70%)}
+.mock>*{position:relative}
+.sbar{display:flex;justify-content:space-between;padding:16px 24px 6px;font-weight:600;font-size:13px}
+.mhead{padding:8px 20px 0}
+.mtag{font-size:10.5px;font-weight:600;color:var(--dim);display:flex;align-items:center;gap:6px}
+.mtag::before{content:"";width:6px;height:6px;border-radius:3px;background:var(--tint)}
+.mtitle{font-size:28px;font-weight:700;letter-spacing:-0.8px;margin-top:3px}
+.card{background:var(--glass);backdrop-filter:blur(30px) saturate(1.7);border:1px solid var(--spec);border-radius:20px;box-shadow:0 10px 34px -12px rgba(20,30,60,0.22),inset 0 1px 1px rgba(255,255,255,0.9)}
+.mono{font-family:var(--mono)}
+.lbl{font-size:9px;letter-spacing:1px;font-weight:600;color:var(--dim);text-transform:uppercase;font-family:var(--mono)}
+.big{font-size:23px;font-weight:700;letter-spacing:-0.8px;font-variant-numeric:tabular-nums}
+.pillbtn{background:var(--tint);color:#fff;border-radius:12px;font-weight:600;text-align:center;box-shadow:0 8px 20px -8px rgba(10,132,255,0.8)}
+.mtab{position:absolute;bottom:16px;left:14px;right:14px;background:var(--glass2);backdrop-filter:blur(30px) saturate(1.7);border:1px solid var(--spec);border-radius:22px;padding:5px;display:flex;gap:3px;box-shadow:0 10px 34px -12px rgba(20,30,60,0.22)}
+.mtab div{flex:1;text-align:center;padding:8px 0;border-radius:17px;font-size:8.5px;font-weight:600;color:var(--dim)}
+.mtab .on{background:var(--tint);color:#fff;box-shadow:0 6px 16px -6px rgba(10,132,255,0.7)}
+/* gallery + footer */
+.themes{margin-top:110px;padding:48px}
+.themes h2{font-size:28px;letter-spacing:-0.8px;margin:12px 0 10px}
+.themes p{color:var(--dim);line-height:1.6;max-width:62ch}
+.sw{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:26px}
+.sw div{border-radius:14px;padding:14px 12px;font-family:var(--mono);font-size:10px;letter-spacing:1px;border:1px solid rgba(255,255,255,0.4)}
+.build{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:110px}
+.build .card{padding:24px}
+.build h3{font-size:15px;margin:10px 0 6px;letter-spacing:-0.2px}
+.build p{font-size:13.5px;line-height:1.55;color:var(--dim)}
+footer{margin:100px 0 60px;text-align:center;color:var(--faint);font-size:13px;line-height:1.7}
+footer .mono{font-size:11px;letter-spacing:1.5px}
+@media(max-width:820px){.hero,.feat{grid-template-columns:1fr;gap:36px}.feat.rev .copy{order:1}.feat.rev .vis{order:2}.hero{padding-top:56px}.sw{grid-template-columns:repeat(2,1fr)}.build{grid-template-columns:1fr}.why{padding:32px 26px}.themes{padding:32px 26px}}
+</style>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0A84FF"/><rect x="34" y="22" width="32" height="56" rx="8" fill="#EEF1F6"/><rect x="40" y="30" width="20" height="6" rx="3" fill="#0A84FF" opacity="0.5"/><rect x="40" y="40" width="20" height="20" rx="4" fill="#0A84FF"/></svg></template>
+</head>
+<body>
+<div class="orbs"></div>
+<main>
+
+<section class="hero">
+<div>
+<div class="eyebrow">WorkTimeTracker · Native iOS</div>
+<h1>One app for the whole <em>field day</em></h1>
+<p class="lede">Clock in, run the route, scan the receipts, count the miles. Built by a field service technician who needed it every single shift — with an assist from Claude Code and Gemini — so every screen earns its place.</p>
+<div class="chips"><span class="chip">SwiftUI</span><span class="chip">iOS 17+</span><span class="chip">Zero dependencies</span><span class="chip">On-device OCR</span><span class="chip">15 themes</span></div>
+</div>
+<div class="vis"><div class="phone"><span class="scr"><img src="img/orders-home.png" alt="Orders home with shift clock"></span></div></div>
+</section>
+
+<section class="why glass">
+<div class="eyebrow">Why it exists</div>
+<h2>I like to make things I need.</h2>
+<p>A field tech's day is 12+ store visits, a shift clock nobody keeps for you, gas receipts in the door pocket, and a route that's yours to figure out. Off-the-shelf time trackers do timers; they don't know what a stop is. <strong>WorkTimeTracker treats route + stores + time + proof as one problem</strong> — the day gets planned, driven, logged, and reimbursed from a single screen. It started as a tool for my own shifts and grew into a full product: widgets, Live Activities, Siri shortcuts, iCloud sync, and a fifteen-theme design system.</p>
+</section>
+
+<section class="feat" id="orders">
+<div class="copy">
+<div class="num">01 / ORDER TRACKER + SHIFT CLOCK</div>
+<h2>The day at a glance, the clock one tap away</h2>
+<p>Home is a live hero card: elapsed shift time, orders done, miles driven, earnings so far. Tap to clock in, hold for a break — punches, breaks, and per-order work/drive time all land in the day's log automatically.</p>
+<ul><li>Order load meter warns when the call count runs hot</li><li>Smart break detection fills in the punches you forgot</li><li>Full punch timeline: clock in, breaks, clock out</li></ul>
+</div>
+<div class="vis"><div class="phone"><span class="scr"><img src="img/time-clock.png" alt="Time screen with punch timeline"></span></div></div>
+</section>
+
+<section class="feat rev" id="receipts">
+<div class="copy">
+<div class="num">02 / RECEIPT SCANNER</div>
+<h2>Point at a receipt, get a ledger entry</h2>
+<p>On-device Vision OCR reads the date, the total, and — for gas receipts — the vehicle and odometer fields. No cloud, no subscription, no typing $13.27 into a spreadsheet at 9pm.</p>
+<ul><li>Handles messy formats: 13.27, 13,27, even 1-digit cents</li><li>Photos stored privately in app storage, exportable to PDF</li><li>Every scan feeds the expense + mileage reports</li></ul>
+</div>
+<div class="vis"><div class="phone"><span class="scr"><div class="mock"><div class="morbs"></div>
+<div class="sbar"><span>9:41</span><span>●●●</span></div>
+<div class="mhead"><div class="mtag">Scan complete</div><div class="mtitle">Receipt</div></div>
+<div style="padding:12px 16px 0"><div class="card" style="padding:14px;display:flex;gap:12px;align-items:center"><div style="width:52px;height:66px;border-radius:10px;background:repeating-linear-gradient(0deg,#fff,#fff 6px,#eef1f6 6px,#eef1f6 8px);border:1px solid var(--hair);flex:none"></div><div style="flex:1"><div style="font-weight:600;font-size:14px">QT #1104 — Fuel</div><div style="font-size:11px;color:var(--dim);margin-top:2px">Scanned just now · Vision OCR</div><div class="mono" style="font-size:10px;color:var(--tint);margin-top:6px;letter-spacing:1px">98% CONFIDENCE</div></div></div></div>
+<div style="padding:10px 16px 0"><div class="card" style="padding:4px 14px">
+<div style="display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--hair)"><span class="lbl" style="align-self:center">Date</span><span class="mono" style="font-size:13px;font-weight:700">08/06</span></div>
+<div style="display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--hair)"><span class="lbl" style="align-self:center">Total</span><span class="mono" style="font-size:13px;font-weight:700;color:var(--tint)">$46.82</span></div>
+<div style="display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--hair)"><span class="lbl" style="align-self:center">Vehicle</span><span class="mono" style="font-size:13px;font-weight:700">TRUCK 2</span></div>
+<div style="display:flex;justify-content:space-between;padding:11px 0"><span class="lbl" style="align-self:center">Odometer</span><span class="mono" style="font-size:13px;font-weight:700">84,112</span></div>
+</div></div>
+<div style="padding:12px 16px 0"><div class="pillbtn" style="padding:13px">Save to Receipts</div></div>
+<div style="padding:10px 16px 0;text-align:center;font-size:11px;color:var(--faint)">Edit any field before saving</div>
+<div class="mtab"><div class="on">Orders</div><div>Routes</div><div>Stores</div><div>More</div></div>
+</div></span></div></div>
+</section>
+
+<section class="feat" id="import">
+<div class="copy">
+<div class="num">03 / SCHEDULE + ROUTE IMPORTER</div>
+<h2>Screenshot the schedule. That's the import.</h2>
+<p>The day's orders arrive as an SAP work-order screen. Instead of retyping 49 tickets, screenshot it — the importer reads store numbers, descriptions, and dates straight off the image and builds the day.</p>
+<ul><li>Two modes: order lists and full work orders</li><li>Imported days land on the calendar, weeks ahead</li><li>Duplicate-day and copy-yesterday for recurring routes</li></ul>
+</div>
+<div class="vis"><div class="phone"><span class="scr"><img src="img/ocr-import.png" alt="Work order OCR import sheet"></span></div></div>
+</section>
+
+<section class="feat rev" id="optimizer">
+<div class="copy">
+<div class="num">04 / ROUTE OPTIMIZER</div>
+<h2>It noticed a better route. It usually does.</h2>
+<p>A genetic-algorithm optimizer runs over the day's stops and quietly offers a better order — here, 67 minutes and a tank of patience saved on a 12-stop, 165-mile day. One tap to apply.</p>
+<ul><li>Smart Loop, Fastest, and Shortest strategies</li><li>Start/end anywhere: current spot, home store, custom</li><li>Driving-heat meter keeps total windshield time honest</li></ul>
+</div>
+<div class="vis"><div class="phone"><span class="scr"><img src="img/route-builder.png" alt="Route builder with optimization suggestion"></span></div></div>
+</section>
+
+<section class="feat" id="stores">
+<div class="copy">
+<div class="num">05 / STORES MAP</div>
+<h2>Every store you cover, one map</h2>
+<p>The full store roster lives on a clustered map — filter to your team, your district, or whatever's nearby. Tap a pin for the store's distance, last visit, and on-time record before you commit to the drive.</p>
+<ul><li>Real store locations, synced from the source</li><li>Travel-time aware: distance is drive time, not geometry</li><li>Visit history per store feeds the day planner</li></ul>
+</div>
+<div class="vis"><div class="phone"><span class="scr"><div class="mock"><div class="morbs"></div>
+<div class="sbar"><span>9:41</span><span>●●●</span></div>
+<div class="mhead"><div class="mtag">142 stores · 8 nearby</div><div class="mtitle">Stores</div></div>
+<div style="padding:10px 16px 0;display:flex;gap:6px">
+<div style="flex:1;text-align:center;padding:8px 0;border-radius:11px;font-size:10.5px;font-weight:600;background:rgba(10,132,255,0.15);color:var(--tint)">All</div>
+<div style="flex:1;text-align:center;padding:8px 0;border-radius:11px;font-size:10.5px;font-weight:600;background:var(--glass);border:1px solid var(--spec);color:var(--dim)">Team</div>
+<div style="flex:1;text-align:center;padding:8px 0;border-radius:11px;font-size:10.5px;font-weight:600;background:var(--glass);border:1px solid var(--spec);color:var(--dim)">District</div>
+<div style="flex:1;text-align:center;padding:8px 0;border-radius:11px;font-size:10.5px;font-weight:600;background:var(--glass);border:1px solid var(--spec);color:var(--dim)">Nearby</div>
+</div>
+<div style="padding:12px 16px 0"><div class="card" style="height:190px;overflow:hidden;position:relative">
+<svg viewBox="0 0 300 190" style="position:absolute;inset:0;width:100%;height:100%">
+<defs><pattern id="g2" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" stroke="rgba(16,20,28,0.05)" fill="none"></path></pattern></defs>
+<rect width="300" height="190" fill="url(#g2)"></rect>
+<path d="M0 120 Q 90 90 160 110 T 300 80" stroke="rgba(16,20,28,0.08)" stroke-width="8" fill="none"></path>
+<path d="M60 0 Q 80 90 60 190" stroke="rgba(16,20,28,0.06)" stroke-width="6" fill="none"></path>
+<circle cx="150" cy="98" r="26" fill="rgba(10,132,255,0.12)"></circle>
+<circle cx="150" cy="98" r="7" fill="#0A84FF" stroke="#fff" stroke-width="2"></circle>
+<g font-family="JetBrains Mono" font-size="9" font-weight="700">
+<circle cx="70" cy="60" r="11" fill="#fff" stroke="rgba(16,20,28,0.12)"></circle><text x="70" y="63" text-anchor="middle" fill="#5A6275">12</text>
+<circle cx="228" cy="52" r="11" fill="#fff" stroke="rgba(16,20,28,0.12)"></circle><text x="228" y="55" text-anchor="middle" fill="#5A6275">7</text>
+<circle cx="212" cy="138" r="13" fill="#0A84FF"></circle><text x="212" y="141" text-anchor="middle" fill="#fff">602</text>
+<circle cx="96" cy="150" r="11" fill="#fff" stroke="rgba(16,20,28,0.12)"></circle><text x="96" y="153" text-anchor="middle" fill="#5A6275">4</text>
+</g></svg>
+</div></div>
+<div style="padding:10px 16px 0"><div class="card" style="padding:14px">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-weight:600;font-size:14px">Store 602 — Greenville</span><span class="mono" style="font-size:10px;color:var(--tint);letter-spacing:1px">HOME</span></div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px">
+<div><div class="lbl">Distance</div><div class="big" style="font-size:18px;margin-top:2px">3.2<span style="font-size:11px;color:var(--dim)"> mi</span></div></div>
+<div><div class="lbl">Last visit</div><div class="big" style="font-size:18px;margin-top:2px">Tue</div></div>
+<div><div class="lbl">On-time</div><div class="big" style="font-size:18px;margin-top:2px;color:var(--tint)">96%</div></div>
+</div></div></div>
+<div class="mtab"><div>Orders</div><div>Routes</div><div class="on">Stores</div><div>More</div></div>
+</div></span></div></div>
+</section>
+
+<section class="feat rev" id="live">
+<div class="copy">
+<div class="num">06 / WIDGETS + LIVE ACTIVITIES</div>
+<h2>The shift follows you to the lock screen</h2>
+<p>The running shift lives in the Dynamic Island and as a Live Activity — clock, next stop, ETA — so the phone never has to be unlocked mid-route. Home-screen widgets keep the day's totals one glance away.</p>
+<ul><li>Live Activity with pause/stop actions from the lock screen</li><li>Widgets refresh adaptively to spare the battery</li><li>Siri + Shortcuts: "clock me in" from CarPlay</li></ul>
+</div>
+<div class="vis"><div class="phone"><span class="scr"><div class="mock" style="background:linear-gradient(165deg,#1a2233,#0e1420)"><div style="position:absolute;inset:-10%;background:radial-gradient(40% 30% at 20% 12%,rgba(10,132,255,0.35),transparent 70%),radial-gradient(36% 28% at 85% 80%,rgba(255,138,170,0.18),transparent 70%)"></div>
+<div class="sbar" style="color:#fff"><span>19:53</span><span>●●●</span></div>
+<div style="text-align:center;color:#fff;margin-top:6px"><div style="font-size:15px;opacity:0.7">Thursday, August 6</div><div style="font-size:56px;font-weight:700;letter-spacing:-2px;line-height:1.05">19:53</div></div>
+<div style="margin:18px 16px 0;border-radius:22px;background:rgba(255,255,255,0.1);backdrop-filter:blur(30px);border:1px solid rgba(255,255,255,0.16);padding:16px;color:#fff">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<div><div class="mono" style="font-size:9px;letter-spacing:1.5px;opacity:0.6">WORKTIMETRACKER · LIVE</div><div style="font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-1px;margin-top:4px">4:32<span style="font-size:15px;color:#6db3ff">:18</span></div><div style="font-size:11px;opacity:0.65;margin-top:3px">Next: Store 1767 · 8.0 mi · arr 20:31</div></div>
+<div style="width:46px;height:46px;border-radius:14px;background:#0A84FF;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px -6px rgba(10,132,255,0.8)"><span style="width:13px;height:13px;background:#fff;border-radius:3px;display:block"></span></div>
+</div>
+<div style="height:4px;border-radius:2px;background:rgba(255,255,255,0.15);margin-top:14px;overflow:hidden"><span style="display:block;width:62%;height:100%;background:#0A84FF;border-radius:2px"></span></div>
+<div style="display:flex;justify-content:space-between;font-size:9.5px;opacity:0.55;margin-top:6px" class="mono"><span>8 OF 12 STOPS</span><span>112.4 MI</span></div>
+</div>
+<div style="margin:12px 16px 0;border-radius:22px;background:rgba(255,255,255,0.08);backdrop-filter:blur(30px);border:1px solid rgba(255,255,255,0.12);padding:14px 16px;color:#fff;display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+<div><div class="mono" style="font-size:8.5px;letter-spacing:1px;opacity:0.55">ORDERS</div><div style="font-size:20px;font-weight:700;margin-top:2px">8<span style="opacity:0.5;font-size:12px">/12</span></div></div>
+<div><div class="mono" style="font-size:8.5px;letter-spacing:1px;opacity:0.55">MILES</div><div style="font-size:20px;font-weight:700;margin-top:2px">112</div></div>
+<div><div class="mono" style="font-size:8.5px;letter-spacing:1px;opacity:0.55">CLOCKED</div><div style="font-size:20px;font-weight:700;margin-top:2px">4:32</div></div>
+</div>
+<div style="text-align:center;color:rgba(255,255,255,0.4);font-size:10px;margin-top:auto;padding-bottom:26px">swipe up to unlock</div>
+</div></span></div></div>
+</section>
+
+<section class="feat" id="earnings">
+<div class="copy">
+<div class="num">07 / EARNINGS + MILEAGE</div>
+<h2>Every mile counted, every hour paid</h2>
+<p>Hours, drive time, and auto-logged mileage roll up into weekly earnings — with the IRS-rate deduction already computed. Payroll CSV and PDF mileage reports export in a tap when it's time to get reimbursed.</p>
+<ul><li>Automatic mileage logging between stops</li><li>Earnings forecast from the pace of the current day</li><li>Payroll CSV + PDF report exporters built in</li></ul>
+</div>
+<div class="vis"><div class="phone"><span class="scr"><div class="mock"><div class="morbs"></div>
+<div class="sbar"><span>9:41</span><span>●●●</span></div>
+<div class="mhead"><div class="mtag">Week 32 · Aug 3–9</div><div class="mtitle">Earnings</div></div>
+<div style="padding:12px 16px 0"><div class="card" style="padding:16px">
+<div class="lbl">This week</div>
+<div style="font-size:38px;font-weight:700;letter-spacing:-1.5px;font-variant-numeric:tabular-nums;margin-top:4px">$1,284<span style="font-size:16px;color:var(--dim)">.50</span></div>
+<div style="font-size:11px;color:var(--tint);font-weight:600;margin-top:3px">+ $312 projected by Sunday</div>
+<div style="display:flex;align-items:flex-end;gap:7px;height:64px;margin-top:16px">
+<div style="flex:1;height:52%;border-radius:6px;background:rgba(10,132,255,0.25)"></div>
+<div style="flex:1;height:70%;border-radius:6px;background:rgba(10,132,255,0.25)"></div>
+<div style="flex:1;height:58%;border-radius:6px;background:rgba(10,132,255,0.25)"></div>
+<div style="flex:1;height:100%;border-radius:6px;background:var(--tint);box-shadow:0 6px 14px -4px rgba(10,132,255,0.6)"></div>
+<div style="flex:1;height:38%;border-radius:6px;background:rgba(10,132,255,0.25)"></div>
+<div style="flex:1;height:12%;border-radius:6px;background:rgba(16,20,28,0.08)"></div>
+<div style="flex:1;height:12%;border-radius:6px;background:rgba(16,20,28,0.08)"></div>
+</div>
+<div style="display:flex;gap:7px;margin-top:6px" class="mono">
+<span style="flex:1;text-align:center;font-size:8px;color:var(--faint)">MO</span><span style="flex:1;text-align:center;font-size:8px;color:var(--faint)">TU</span><span style="flex:1;text-align:center;font-size:8px;color:var(--faint)">WE</span><span style="flex:1;text-align:center;font-size:8px;color:var(--tint);font-weight:700">TH</span><span style="flex:1;text-align:center;font-size:8px;color:var(--faint)">FR</span><span style="flex:1;text-align:center;font-size:8px;color:var(--faint)">SA</span><span style="flex:1;text-align:center;font-size:8px;color:var(--faint)">SU</span>
+</div></div></div>
+<div style="padding:10px 16px 0;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<div class="card" style="padding:13px"><div class="lbl">Hours</div><div class="big" style="margin-top:3px">32.3<span style="font-size:12px;color:var(--dim)">h</span></div><div style="font-size:10px;color:var(--faint);margin-top:2px">4.8h drive</div></div>
+<div class="card" style="padding:13px"><div class="lbl">Miles</div><div class="big" style="margin-top:3px">412<span style="font-size:12px;color:var(--dim)">mi</span></div><div style="font-size:10px;color:var(--faint);margin-top:2px">auto-logged</div></div>
+</div>
+<div style="padding:10px 16px 0"><div class="card" style="padding:13px;display:flex;justify-content:space-between;align-items:center"><div><div class="lbl">Mileage deduction</div><div style="font-size:11px;color:var(--faint);margin-top:2px">IRS rate · exports to PDF</div></div><div class="big" style="color:var(--tint)">$288.40</div></div></div>
+<div class="mtab"><div>Orders</div><div>Routes</div><div>Stores</div><div class="on">More</div></div>
+</div></span></div></div>
+</section>
+
+<section class="themes glass">
+<div class="eyebrow">Bonus · Design system</div>
+<h2>Fifteen themes, one app</h2>
+<p>Not color swaps — complete visual systems. Each theme owns its palette, type pairing, shape language, and map style, switchable live from Settings. Liquid Glass (this page's look) even carries a user-tintable accent.</p>
+<div class="sw">
+<div style="background:#EEF1F6;color:#10141C;border-color:rgba(16,20,28,0.1)">LIQUID<br><span style="color:#0A84FF">■</span> glass</div>
+<div style="background:#070A0F;color:#7EF0C2">AURORA<br>■ mint</div>
+<div style="background:#F4EFE6;color:#1F4D3A">PAPERLINE<br>■ forest</div>
+<div style="background:#16140F;color:#FFB347">CONSOLE<br>■ amber</div>
+<div style="background:#0A0418;color:#16E0E0">CYBER<br>■ neon</div>
+</div>
+<p style="margin-top:18px;font-size:13px;color:var(--faint)">+ Patriot, Astra, Onyx, Solstice, Nocturne, Blueprint, Riso, Venom, Graphite, Voltage</p>
+</section>
+
+<div class="build">
+<div class="card"><div class="eyebrow">Craft</div><h3>Pure Apple SDK, zero dependencies</h3><p>SwiftUI throughout, Vision for OCR, MapKit for routing and clustering, ActivityKit for the Live Activity. Nothing to update but the app.</p></div>
+<div class="card"><div class="eyebrow">Care</div><h3>Private by default</h3><p>All OCR runs on-device. Receipts live in app storage, not the Files app. Sync is iCloud, biometrics guard the door.</p></div>
+<div class="card"><div class="eyebrow">Polish</div><h3>Tested where it hurts</h3><p>Unit suites cover the receipt parser, route optimizer, earnings math, and data integrity — the parts a field day actually depends on.</p></div>
+</div>
+
+<footer>
+<div class="mono" style="color:var(--faint)">WORKTIMETRACKER · BUILT FOR THE FIELD, FROM THE FIELD</div>
+<div style="margin-top:8px">Designed and built end-to-end by one person — product, design, and Swift.</div>
+</footer>
+
+</main>
+</body>
+</html>
