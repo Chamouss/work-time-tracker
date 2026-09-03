@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://chamouss.github.io/work-time-tracker/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image><image:loc>https://chamouss.github.io/work-time-tracker/img/og-cover.png</image:loc><image:title>WorkTimeTracker &#8212; one app for the whole field day</image:title></image:image>
+    <image:image><image:loc>https://chamouss.github.io/work-time-tracker/img/orders-home.png</image:loc><image:title>Orders home with shift clock</image:title></image:image>
+    <image:image><image:loc>https://chamouss.github.io/work-time-tracker/img/ocr-import.png</image:loc><image:title>Work order OCR import sheet</image:title></image:image>
+    <image:image><image:loc>https://chamouss.github.io/work-time-tracker/img/route-builder.png</image:loc><image:title>Route builder with optimization suggestion</image:title></image:image>
+    <image:image><image:loc>https://chamouss.github.io/work-time-tracker/img/time-clock.png</image:loc><image:title>Time screen with punch timeline</image:title></image:image>
+  </url>
+</urlset>

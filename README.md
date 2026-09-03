@@ -1,11 +1,11 @@
-[README.md](https://github.com/user-attachments/files/30806502/README.md)
 # WorkTimeTracker
 
 **One app for the whole field day.** Native iOS app for field service technicians — clock in, run the route, scan the receipts, count the miles. Built with an assist from Claude Code and Gemini.
 
 `SwiftUI` · `iOS 17+` · `Zero dependencies` · `On-device OCR` · `15 themes`
 
-> **[View the full showcase →]([https://github.com/Chamouss/work-time-tracker/blob/main/index.html](https://chamouss.github.io/work-time-tracker/)** *(GitHub Pages: `img/index.html`)*
+> ### → **[View the live showcase](https://chamouss.github.io/work-time-tracker/)**
+> A full walkthrough of every screen, hosted on GitHub Pages.
 
 ---
 
@@ -13,7 +13,7 @@
 
 I like to make things I need.
 
-A field tech's day is 12+ store visits, a shift clock nobody keeps for you, gas receipts in the door pocket, and a route that's yours to figure out. Off-the-shelf time trackers do timers; they don't know what a stop is. WorkTimeTracker treats **route + stores + time + proof** as one problem — the day gets planned, driven, logged, and reimbursed from a single screen. It started as a tool for my own shifts and grew into a full product.
+A field tech's day is 12+ store visits, a shift clock nobody keeps for you, gas receipts in the door pocket, and a route that's yours to figure out. Off-the-shelf time trackers do timers; they don't know what a stop is. WorkTimeTracker treats **route + stores + time + proof** as one problem — the day gets planned, driven, logged, and reimbursed from a single screen. It started as a tool for my own shifts — built on my own time while I worked as an IT support technician covering Publix Super Markets stores across a multi-store territory — and grew into a full product. It is a personal project, not affiliated with or endorsed by Publix.
 
 ---
 

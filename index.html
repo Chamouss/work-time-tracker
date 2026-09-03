@@ -3,8 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WorkTimeTracker — the field day, organized</title>
+<title>WorkTimeTracker &mdash; iOS Time, Route &amp; Mileage App for Field Techs</title>
+<meta name="description" content="Native iOS app for field service technicians: shift clock, on-device receipt OCR, schedule import, route optimizer, and automatic mileage logging.">
+<link rel="canonical" href="https://chamouss.github.io/work-time-tracker/">
+<meta name="author" content="Chamous Suber">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="theme-color" content="#0A84FF">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="WorkTimeTracker">
+<meta property="og:url" content="https://chamouss.github.io/work-time-tracker/">
+<meta property="og:title" content="WorkTimeTracker &mdash; iOS Time, Route &amp; Mileage App for Field Techs">
+<meta property="og:description" content="Clock in, run the route, scan the receipts, count the miles. A native SwiftUI app for field service technicians.">
+<meta property="og:image" content="https://chamouss.github.io/work-time-tracker/img/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="WorkTimeTracker shown on iPhone beside its tagline: one app for the whole field day.">
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="WorkTimeTracker &mdash; iOS Time, Route &amp; Mileage App for Field Techs">
+<meta name="twitter:description" content="Clock in, run the route, scan the receipts, count the miles. Built in SwiftUI for field service technicians.">
+<meta name="twitter:image" content="https://chamouss.github.io/work-time-tracker/img/og-cover.png">
+
+<link rel="icon" href="/work-time-tracker/favicon.png" sizes="32x32">
+<link rel="icon" href="/work-time-tracker/img/icon-512.png" sizes="512x512">
+<link rel="apple-touch-icon" href="/work-time-tracker/img/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://chamouss.github.io/work-time-tracker/#app",
+      "name": "WorkTimeTracker",
+      "alternateName": "Work Time Tracker",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Field Service Management",
+      "operatingSystem": "iOS 17+",
+      "url": "https://chamouss.github.io/work-time-tracker/",
+      "image": "https://chamouss.github.io/work-time-tracker/img/og-cover.png",
+      "screenshot": [
+        "https://chamouss.github.io/work-time-tracker/img/orders-home.png",
+        "https://chamouss.github.io/work-time-tracker/img/ocr-import.png",
+        "https://chamouss.github.io/work-time-tracker/img/route-builder.png"
+      ],
+      "description": "A native SwiftUI app for field service technicians that combines a shift clock, on-device receipt OCR, schedule and work-order import, a genetic route optimizer, store mapping, and automatic mileage and earnings reporting.",
+      "featureList": [
+        "Shift clock with automatic break detection",
+        "On-device Vision OCR receipt scanning",
+        "Schedule and work-order import from screenshots",
+        "Genetic-algorithm route optimization",
+        "Clustered store map with drive-time distances",
+        "Widgets and Live Activities",
+        "Mileage logging with IRS-rate deduction",
+        "Payroll CSV and PDF report export"
+      ],
+      "author": { "@id": "https://chamouss.github.io/work-time-tracker/#author" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://chamouss.github.io/work-time-tracker/#author",
+      "name": "Chamous Suber",
+      "jobTitle": "IT Support Technician",
+      "url": "https://github.com/Chamouss",
+      "sameAs": ["https://github.com/Chamouss"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://chamouss.github.io/work-time-tracker/#website",
+      "url": "https://chamouss.github.io/work-time-tracker/",
+      "name": "WorkTimeTracker",
+      "inLanguage": "en-US",
+      "about": { "@id": "https://chamouss.github.io/work-time-tracker/#app" }
+    }
+  ]
+}
+</script>
 <style>
 :root{--tint:#0A84FF;--bg:#EEF1F6;--ink:#10141C;--dim:#5A6275;--faint:#9AA1B2;--glass:rgba(255,255,255,0.5);--glass2:rgba(255,255,255,0.72);--spec:rgba(255,255,255,0.75);--hair:rgba(16,20,28,0.08);--mono:"JetBrains Mono",ui-monospace,monospace;--sans:-apple-system,"SF Pro Display",BlinkMacSystemFont,"Segoe UI",sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -84,13 +164,13 @@ footer .mono{font-size:11px;letter-spacing:1.5px}
 <p class="lede">Clock in, run the route, scan the receipts, count the miles. Built by a field service technician who needed it every single shift — with an assist from Claude Code and Gemini — so every screen earns its place.</p>
 <div class="chips"><span class="chip">SwiftUI</span><span class="chip">iOS 17+</span><span class="chip">Zero dependencies</span><span class="chip">On-device OCR</span><span class="chip">15 themes</span></div>
 </div>
-<div class="vis"><div class="phone"><span class="scr"><img src="img/orders-home.png" alt="Orders home with shift clock"></span></div></div>
+<div class="vis"><div class="phone"><span class="scr"><img src="img/orders-home.png" alt="Orders home with shift clock" width="700" height="1517" loading="eager" fetchpriority="high" decoding="async"></span></div></div>
 </section>
 
 <section class="why glass">
 <div class="eyebrow">Why it exists</div>
 <h2>I like to make things I need.</h2>
-<p>A field tech's day is 12+ store visits, a shift clock nobody keeps for you, gas receipts in the door pocket, and a route that's yours to figure out. Off-the-shelf time trackers do timers; they don't know what a stop is. <strong>WorkTimeTracker treats route + stores + time + proof as one problem</strong> — the day gets planned, driven, logged, and reimbursed from a single screen. It started as a tool for my own shifts and grew into a full product: widgets, Live Activities, Siri shortcuts, iCloud sync, and a fifteen-theme design system.</p>
+<p>A field tech's day is 12+ store visits, a shift clock nobody keeps for you, gas receipts in the door pocket, and a route that's yours to figure out. Off-the-shelf time trackers do timers; they don't know what a stop is. <strong>WorkTimeTracker treats route + stores + time + proof as one problem</strong> — the day gets planned, driven, logged, and reimbursed from a single screen. It started as a tool for my own shifts — built on my own time while I worked as an IT support technician covering Publix Super Markets stores across a multi-store territory; it is a personal project, not affiliated with or endorsed by Publix — and grew into a full product: widgets, Live Activities, Siri shortcuts, iCloud sync, and a fifteen-theme design system.</p>
 </section>
 
 <section class="feat" id="orders">
@@ -100,7 +180,7 @@ footer .mono{font-size:11px;letter-spacing:1.5px}
 <p>Home is a live hero card: elapsed shift time, orders done, miles driven, earnings so far. Tap to clock in, hold for a break — punches, breaks, and per-order work/drive time all land in the day's log automatically.</p>
 <ul><li>Order load meter warns when the call count runs hot</li><li>Smart break detection fills in the punches you forgot</li><li>Full punch timeline: clock in, breaks, clock out</li></ul>
 </div>
-<div class="vis"><div class="phone"><span class="scr"><img src="img/time-clock.png" alt="Time screen with punch timeline"></span></div></div>
+<div class="vis"><div class="phone"><span class="scr"><img src="img/time-clock.png" alt="Time screen with punch timeline" width="700" height="1517" loading="lazy" decoding="async"></span></div></div>
 </section>
 
 <section class="feat rev" id="receipts">
@@ -133,7 +213,7 @@ footer .mono{font-size:11px;letter-spacing:1.5px}
 <p>The day's orders arrive as an SAP work-order screen. Instead of retyping 49 tickets, screenshot it — the importer reads store numbers, descriptions, and dates straight off the image and builds the day.</p>
 <ul><li>Two modes: order lists and full work orders</li><li>Imported days land on the calendar, weeks ahead</li><li>Duplicate-day and copy-yesterday for recurring routes</li></ul>
 </div>
-<div class="vis"><div class="phone"><span class="scr"><img src="img/ocr-import.png" alt="Work order OCR import sheet"></span></div></div>
+<div class="vis"><div class="phone"><span class="scr"><img src="img/ocr-import.png" alt="Work order OCR import sheet" width="700" height="1517" loading="lazy" decoding="async"></span></div></div>
 </section>
 
 <section class="feat rev" id="optimizer">
@@ -143,7 +223,7 @@ footer .mono{font-size:11px;letter-spacing:1.5px}
 <p>A genetic-algorithm optimizer runs over the day's stops and quietly offers a better order — here, 67 minutes and a tank of patience saved on a 12-stop, 165-mile day. One tap to apply.</p>
 <ul><li>Smart Loop, Fastest, and Shortest strategies</li><li>Start/end anywhere: current spot, home store, custom</li><li>Driving-heat meter keeps total windshield time honest</li></ul>
 </div>
-<div class="vis"><div class="phone"><span class="scr"><img src="img/route-builder.png" alt="Route builder with optimization suggestion"></span></div></div>
+<div class="vis"><div class="phone"><span class="scr"><img src="img/route-builder.png" alt="Route builder with optimization suggestion" width="700" height="1517" loading="lazy" decoding="async"></span></div></div>
 </section>
 
 <section class="feat" id="stores">
